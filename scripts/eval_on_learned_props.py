@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 from datasets.captioning_dataset import ActivityNetCaptionsDataset
-from epoch_loops.captioning_epoch_loops import greedy_decoder, validation_1by1_loop
+from epoch_loops.captioning_epoch_loops import greedy_decoder, beam_search_decoder, validation_1by1_loop
 from model.captioning_module import BiModalTransformer, Transformer
 
 def convert_props_in_json_to_csv(prop_pred_path, val_1_json_path, avail_mp4_path):
@@ -125,8 +125,12 @@ def eval_on_learned_props(args):
     model.eval()
     
     # load the best model
+    # val_metrics_pred_prop = validation_1by1_loop(
+    #     cfg, model, val_pred_prop_loader, greedy_decoder, cap_model_cpt['epoch'], TBoard
+    # )
+
     val_metrics_pred_prop = validation_1by1_loop(
-        cfg, model, val_pred_prop_loader, greedy_decoder, cap_model_cpt['epoch'], TBoard
+        cfg, model, val_pred_prop_loader, beam_search_decoder, cap_model_cpt['epoch'], TBoard
     )
 
     print(val_metrics_pred_prop)

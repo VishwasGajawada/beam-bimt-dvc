@@ -144,7 +144,7 @@ if __name__ == "__main__":
     )
     parser.add_argument('--H', type=int, default=4, help='number of heads in multiheaded attention')
     parser.add_argument(
-        '--d_ff_video', type=int, help='size of the internal layer of PositionwiseFeedForward')
+        '--d_ff_video', type=int, help='size of the internal layer of PositionwiseFeedForward')                                                                                                                                                                                                                                                                                                                              
     parser.add_argument(
         '--d_ff_audio', type=int, help='size of the internal layer of PositionwiseFeedForward')
     parser.add_argument(

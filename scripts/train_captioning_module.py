@@ -6,6 +6,7 @@ from torch.utils.data import DataLoader
 
 from datasets.captioning_dataset import ActivityNetCaptionsDataset
 from epoch_loops.captioning_epoch_loops import (greedy_decoder, save_model,
+                                                beam_search_decoder,
                                                 training_loop,
                                                 validation_1by1_loop,
                                                 validation_next_word_loop)
@@ -91,6 +92,12 @@ def train_cap(cfg):
         val_2_loss = validation_next_word_loop(
             cfg, model, val_2_loader, greedy_decoder, criterion, epoch, TBoard, exp_name
         )
+        # val_1_loss = validation_next_word_loop(
+        #     cfg, model, val_1_loader, beam_search_decoder, criterion, epoch, TBoard, exp_name
+        # )
+        # val_2_loss = validation_next_word_loop(
+        #     cfg, model, val_2_loader, beam_search_decoder, criterion, epoch, TBoard, exp_name
+        # )
         val_avg_loss = (val_1_loss + val_2_loss) / 2
 
         if scheduler is not None:
@@ -105,6 +112,12 @@ def train_cap(cfg):
             val_2_metrics = validation_1by1_loop(
                 cfg, model, val_2_loader, greedy_decoder, epoch, TBoard
             )
+            # val_1_metrics = validation_1by1_loop(
+            #     cfg, model, val_1_loader, beam_search_decoder, epoch, TBoard
+            # )
+            # val_2_metrics = validation_1by1_loop(
+            #     cfg, model, val_2_loader, beam_search_decoder, epoch, TBoard
+            # )
             
             if cfg.to_log:
                 # averaging metrics obtained from val_1 and val_2

@@ -10,7 +10,7 @@ sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from datasets.captioning_dataset import ActivityNetCaptionsDataset
 # from datasets.load_features import load_features_from_npy
 from datasets.load_features import crop_a_segment, pad_segment
-from epoch_loops.captioning_epoch_loops import make_masks
+from epoch_loops.captioning_epoch_loops import beam_search_decoder, make_masks
 from model.captioning_module import BiModalTransformer
 from model.proposal_generator import MultimodalProposalGenerator
 from utilities.proposal_utils import (get_corner_coords,
@@ -223,10 +223,15 @@ def caption_proposals(
             )
 
             # decode a caption for each segment one-by-one caption word
-            ints_stack = greedy_decoder(
+            ints_stack = beam_search_decoder(
                 cap_model, feature_stacks, cfg.max_len, train_dataset.start_idx, train_dataset.end_idx,
                 train_dataset.pad_idx, cfg.modality
             )
+            # ints_stack = greedy_decoder(
+            #     cap_model, feature_stacks, cfg.max_len, train_dataset.start_idx, train_dataset.end_idx,
+            #     train_dataset.pad_idx, cfg.modality
+            # )
+            # print("debug: after beam_search_decoder")
             assert len(ints_stack) == 1, 'the func was cleaned to support only batch=1 (validation_1by1_loop)'
 
             # transform integers into strings
@@ -264,6 +269,11 @@ def which_ffprobe() -> str:
     result = subprocess.run(['which', 'ffprobe'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     ffprobe_path = result.stdout.decode('utf-8').replace('\n', '')
     return ffprobe_path
+
+# def get_combined_caption(captions) :
+#     for i in range(len(captions)) :
+#         captions[i]['duration'] = captions[i]['end'] - captions[i]['start']
+
 
 def get_video_duration(path):
     '''Determines the duration of the custom video

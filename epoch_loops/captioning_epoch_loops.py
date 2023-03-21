@@ -35,6 +35,60 @@ def calculate_metrics(
         metrics['Average across tIoUs'][metric] = sum(score) / float(len(score))
     
     return metrics
+import heapq
+import torch
+
+def beam_search_decoder(model, feature_stacks, max_len, start_idx, end_idx, pad_idx, modality, beam_size=7):
+    assert model.training is False, 'call model.eval first'
+
+    if 'audio' in modality:
+        B, _Sa_, _Da_ = feature_stacks['audio'].shape
+        device = feature_stacks['audio'].device
+    elif modality == 'video':
+        B, _Sv_, _Drgb_ = feature_stacks['rgb'].shape
+        device = feature_stacks['rgb'].device
+    else:
+        raise Exception(f'Unknown modality: {modality}')
+
+    # Create initial beam with start tokens
+    beams = [{'sequence': torch.ones(B, 1, dtype=torch.long, device=device) * start_idx,
+              'score': torch.zeros(B, dtype=torch.float, device=device)}]
+
+    # Keep track of completed sequences
+    completed_sequences = []
+
+    for i in range(max_len):
+        candidates = []
+        for beam in beams:
+            trg = beam['sequence']
+            masks = make_masks(feature_stacks, trg, modality, pad_idx)
+            preds = model(feature_stacks, trg, masks)
+            top_k_scores, top_k_indices = torch.topk(preds[:, -1], k=beam_size, dim=-1)
+            for k in range(beam_size):
+                next_word = top_k_indices[:, k].unsqueeze(1)
+                score = top_k_scores[:, k]
+                candidate = {'sequence': torch.cat([beam['sequence'], next_word], dim=-1),
+                             'score': beam['score'] + score}
+                if (next_word == end_idx).all():
+                    completed_sequences.append(candidate)
+                else:
+                    candidates.append(candidate)
+
+        if not candidates:
+            break
+
+        # Sort candidates by score and select top-k for next iteration
+        candidates.sort(key=lambda x: x['score'], reverse=True)
+        beams = candidates[:beam_size]
+
+    # Add completed sequences to the final beams list
+    beams += completed_sequences
+
+    # Sort beams by score and return the highest-scoring sequence
+    beams.sort(key=lambda x: x['score'], reverse=True)
+    final_sequence = beams[0]['sequence']
+
+    return final_sequence
 
 def greedy_decoder(model, feature_stacks, max_len, start_idx, end_idx, pad_idx, modality):
     assert model.training is False, 'call model.eval first'
