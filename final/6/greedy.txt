@@ -1,0 +1,2 @@
+[{'start': 0.0, 'end': 63.3, 'sentence': 'A boy is seen standing in a room playing with a ball on a ball and leads into him playing with a ball'}, {'start': 0.7, 'end': 14.4, 'sentence': 'A boy is seen standing in a room playing with a ball in his hand'}, {'start': 48.3, 'end': 61.9, 'sentence': 'The boy then throws the ball back and forth , then he tries to hit it'}, {'start': 37.9, 'end': 57.1, 'sentence': 'He then grabs the ball and walks away'}, {'start': 0.0, 'end': 2.3, 'sentence': 'A boy is sitting on a bed'}]
+video

@@ -194,7 +194,8 @@ def generate_proposals(
 def caption_proposals(
         cap_model: torch.nn.Module, feature_paths: Dict[str, str],
         train_dataset: torch.utils.data.dataset.Dataset, cfg: Config, device: int, proposals: torch.Tensor,
-        duration_in_secs: float
+        duration_in_secs: float,
+        search_type
     ) -> List[Dict[str, Union[float, str]]]:
     '''Captions the proposals using the pre-trained model. You must specify the duration of the orignal video.
 
@@ -223,14 +224,16 @@ def caption_proposals(
             )
 
             # decode a caption for each segment one-by-one caption word
-            ints_stack = beam_search_decoder(
-                cap_model, feature_stacks, cfg.max_len, train_dataset.start_idx, train_dataset.end_idx,
-                train_dataset.pad_idx, cfg.modality
-            )
-            # ints_stack = greedy_decoder(
-            #     cap_model, feature_stacks, cfg.max_len, train_dataset.start_idx, train_dataset.end_idx,
-            #     train_dataset.pad_idx, cfg.modality
-            # )
+            if search_type == "greedy" :
+                ints_stack = greedy_decoder(
+                    cap_model, feature_stacks, cfg.max_len, train_dataset.start_idx, train_dataset.end_idx,
+                    train_dataset.pad_idx, cfg.modality
+                )
+            else :
+                ints_stack = beam_search_decoder(
+                    cap_model, feature_stacks, cfg.max_len, train_dataset.start_idx, train_dataset.end_idx,
+                    train_dataset.pad_idx, cfg.modality
+                )
             # print("debug: after beam_search_decoder")
             assert len(ints_stack) == 1, 'the func was cleaned to support only batch=1 (validation_1by1_loop)'
 
@@ -281,6 +284,7 @@ def get_video_duration(path):
         float -- duration of the video in seconds'''
     cmd = f'{which_ffprobe()} -hide_banner -loglevel panic' \
           f' -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 {path}'
+    # print(cmd)
     result = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     video_duration = float(result.stdout.decode('utf-8').replace('\n', ''))
     print('Video Duration:', video_duration)
@@ -297,7 +301,14 @@ if __name__ == "__main__":
     parser.add_argument('--device_id', type=int, default=0)
     parser.add_argument('--max_prop_per_vid', type=int, default=5)
     parser.add_argument('--nms_tiou_thresh', type=float, help='removed if tiou > nms_tiou_thresh. In (0, 1)')
+    parser.add_argument('--video_path', required=False)
+    parser.add_argument('--search_type', required=False)
     args = parser.parse_args()
+
+    if args.video_path is not None :
+        args.duration_in_secs = get_video_duration(args.video_path)
+
+    print(args.duration_in_secs)
 
     feature_paths = {
         'audio': args.vggish_features_path,
@@ -320,9 +331,11 @@ if __name__ == "__main__":
         proposals = proposals.unsqueeze(0)
     # Captions for each proposal
     captions = caption_proposals(
-        cap_model, feature_paths, train_dataset, cap_cfg, args.device_id, proposals, args.duration_in_secs
+        cap_model, feature_paths, train_dataset, cap_cfg, args.device_id, proposals, args.duration_in_secs,
+        args.search_type
     )
 
-    print(captions)
+    for caption in captions : 
+        print(caption)
 
     # TODO: save original num of features (0th dim.) and just remove padding from them and trim accordingly

@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 from datasets.captioning_dataset import ActivityNetCaptionsDataset
-from epoch_loops.captioning_epoch_loops import greedy_decoder, beam_search_decoder, validation_1by1_loop
+from epoch_loops.captioning_epoch_loops import greedy_decoder, beam_search_decoder, validation_1by1_loop, beam_search_decoder_batches
 from model.captioning_module import BiModalTransformer, Transformer
 
 def convert_props_in_json_to_csv(prop_pred_path, val_1_json_path, avail_mp4_path):
@@ -110,7 +110,8 @@ def eval_on_learned_props(args):
     train_dataset = ActivityNetCaptionsDataset(cfg, 'train', get_full_feat=False)
     pred_prop_dataset = ActivityNetCaptionsDataset(cfg, 'learned_props', get_full_feat=False)
 
-    val_pred_prop_loader = DataLoader(pred_prop_dataset, collate_fn=pred_prop_dataset.dont_collate)
+    # val_pred_prop_loader = DataLoader(pred_prop_dataset, collate_fn=pred_prop_dataset.dont_collate)
+    val_pred_prop_loader = DataLoader(pred_prop_dataset, batch_size = 1, collate_fn=pred_prop_dataset.dont_collate)
     print(f'Loader will use: {val_pred_prop_loader.dataset.meta_path}')
 
     if cfg.modality == 'audio_video':
@@ -130,7 +131,7 @@ def eval_on_learned_props(args):
     # )
 
     val_metrics_pred_prop = validation_1by1_loop(
-        cfg, model, val_pred_prop_loader, beam_search_decoder, cap_model_cpt['epoch'], TBoard
+        cfg, model, val_pred_prop_loader, beam_search_decoder_batches, cap_model_cpt['epoch'], TBoard
     )
 
     print(val_metrics_pred_prop)

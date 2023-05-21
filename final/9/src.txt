@@ -1,0 +1,4 @@
+A woman is seen talking to the camera and presenting various liquids to the camera	0.0	23.9	183.86	train	96
+v_m22TDwfa8go	She ready's the tip of a glass and dips the glass into sugar on a plate	23.9	52.4	183.86	train	97
+v_m22TDwfa8go	She pours various liquids into a mixer and shakes the mixture all together	54.24	136.05	183.86	train	98
+v_m22TDwfa8go	She pours the drink out into the glass while still speaking to the camera	136.05	183.86	183.86	train	99

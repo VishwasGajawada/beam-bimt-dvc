@@ -1,0 +1,4 @@
+A close up of a bike wheel is seen that leads into a person's hands pushing on the tire	0.0	32.88	98.15	train	93
+v_W19-fYOO9sg	The person uses a tool along the tire to help move it along	30.92	72.63	98.15	train	94
+v_W19-fYOO9sg	The person finally pushes the tire along it's sides	65.76	95.7	98.15	train	95
+

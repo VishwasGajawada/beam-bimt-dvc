@@ -1,0 +1,2 @@
+A woman puts a pair of shoes on while sitting in an office chair	0.0	17.15	17.15	train	91
+v_GFE2wAi9fjo	The woman buckles her shoes	6.6	17.15	17.15	train	92

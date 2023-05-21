@@ -1,0 +1,15 @@
+Video Duration: 36.501
+36.501
+Contructing caption_iterator for "train" phase
+Using vanilla Generator
+initialization: xavier
+Glove emb of the same size as d_model_caps
+Pretrained caption path: 
+ ./sample/best_cap_model.pt
+B =  1
+B =  1
+B =  1
+B =  1
+[{'start': 0.0, 'end': 7.5, 'sentence': 'A person is seen walking down a floor with a vacuum'}, {'start': 0.0, 'end': 2.9, 'sentence': 'A person is seen walking up a vacuum'}, {'start': 3.0, 'end': 14.0, 'sentence': 'A person is seen walking around a room with a vacuum'}, {'start': 19.2, 'end': 36.5, 'sentence': 'The dog continues to hit the ball back and forth , then the dog goes back to the camera'}]
+video
+

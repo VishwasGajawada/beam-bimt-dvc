@@ -1,0 +1,242 @@
+{0.3: {'Bleu_1': 0.10752949684127826, 'Bleu_2': 0.05130428289857745, 'Bleu_3': 0.023404932160311878, 'Bleu_4': 0.009891579744968385, 'METEOR': 0.056705156580190645, 'ROUGE_L': 0.1157673467261773, 'CIDEr': 0.15088163710884644, 'Recall': 0.26819586540494955, 'Precision': 0.4983761149527846}, 0.5: {'Bleu_1': 0.08842393180481194, 'Bleu_2': 0.04162603191950416, 'Bleu_3': 0.019472568752123998, 'Bleu_4': 0.00824435268032908, 'METEOR': 0.04807701329817676, 'ROUGE_L': 0.09475924957087865, 'CIDEr': 0.0984876513071863, 'Recall': 0.1819737734326808, 'Precision': 0.39173892594244936}, 0.7: {'Bleu_1': 0.052590712483417464, 'Bleu_2': 0.025013784973524314, 'Bleu_3': 0.012221170236091022, 'Bleu_4': 0.005333556955195286, 'METEOR': 0.03088995479683468, 'ROUGE_L': 0.057061351143394806, 'CIDEr': 0.05158019846507839, 'Recall': 0.10341714219647707, 'Precision': 0.2245170644657596}, 0.9: {'Bleu_1': 0.015882408323093903, 'Bleu_2': 0.007448183140648682, 'Bleu_3': 0.0035374416413782106, 'Bleu_4': 0.0012915172804824995, 'METEOR': 0.009878171867100707, 'ROUGE_L': 0.01717525742176102, 'CIDEr': 0.01736877496235754, 'Recall': 0.03307798797380772, 'Precision': 0.06732677448137409}, 'Average across tIoUs': {'Bleu_1': 0.06574967075327968, 'Bleu_2': 0.03125849841723049, 'Bleu_3': 0.01463015085856336, 'Bleu_4': 0.006173238815400976, 'METEOR': 0.03626437162077482, 'ROUGE_L': 0.0708889262956518, 'CIDEr': 0.07938120900170946, 'Recall': 0.14578539690908648, 'Precision': 0.2930942821027586}}
+
+
+{0.3: {'Bleu_1': 0.1056420624466455, 'Bleu_2': 0.05063684808691228, 'Bleu_3': 0.02399447616177959, 'Bleu_4': 0.01066658404712131, 'METEOR': 0.056253784675179226, 'ROUGE_L': 0.11382532004470314, 'CIDEr': 0.148697655018153, 'Recall': 0.2628927173651692, 'Precision': 0.48976132054427834}, 0.5: {'Bleu_1': 0.08941116146638142, 'Bleu_2': 0.04339448665514217, 'Bleu_3': 0.021116398173828998, 'Bleu_4': 0.009883882048033093, 'METEOR': 0.049504741179620775, 'ROUGE_L': 0.09601377040543375, 'CIDEr': 0.10738299598691045, 'Recall': 0.17929127964260833, 'Precision': 0.38741913896944025}, 0.7: {'Bleu_1': 0.05477432529062681, 'Bleu_2': 0.02684788757831593, 'Bleu_3': 0.013477415056421894, 'Bleu_4': 0.006450639178646138, 'METEOR': 0.03212482317467338, 'ROUGE_L': 0.05838264441272359, 'CIDEr': 0.06242451440147922, 'Recall': 0.10272796638511472, 'Precision': 0.22191240984459826}, 0.9: {'Bleu_1': 0.016208334498795718, 'Bleu_2': 0.008192344763173674, 'Bleu_3': 0.004103675051938936, 'Bleu_4': 0.0020937493055176205, 'METEOR': 0.010352612083285627, 'ROUGE_L': 0.017591190443169903, 'CIDEr': 0.018176710929384256, 'Recall': 0.031173868637620557, 'Precision': 0.06411257342553353}, 'Average across tIoUs': {'Bleu_1': 0.06650897092561237, 'Bleu_2': 0.032267891770886015, 'Bleu_3': 0.015672991110992355, 'Bleu_4': 0.00727371364482954, 'METEOR': 0.037058990278189756, 'ROUGE_L': 0.0714532313265076, 'CIDEr': 0.08417046908398174, 'Recall': 0.1440214580076282, 'Precision': 0.2908013606959626}}
+
+9988,10100
+{
+    0.3: {
+        "Bleu_1": 0.10752949684127826,
+        "Bleu_2": 0.05130428289857745,
+        "Bleu_3": 0.023404932160311878,
+        "Bleu_4": 0.009891579744968385,
+        "METEOR": 0.056705156580190645,
+        "ROUGE_L": 0.1157673467261773,
+        "CIDEr": 0.15088163710884644,
+        "Recall": 0.26819586540494955,
+        "Precision": 0.4983761149527846,
+    },
+    0.5: {
+        "Bleu_1": 0.08842393180481194,
+        "Bleu_2": 0.04162603191950416,
+        "Bleu_3": 0.019472568752123998,
+        "Bleu_4": 0.00824435268032908,
+        "METEOR": 0.04807701329817676,
+        "ROUGE_L": 0.09475924957087865,
+        "CIDEr": 0.0984876513071863,
+        "Recall": 0.1819737734326808,
+        "Precision": 0.39173892594244936,
+    },
+    0.7: {
+        "Bleu_1": 0.052590712483417464,
+        "Bleu_2": 0.025013784973524314,
+        "Bleu_3": 0.012221170236091022,
+        "Bleu_4": 0.005333556955195286,
+        "METEOR": 0.03088995479683468,
+        "ROUGE_L": 0.057061351143394806,
+        "CIDEr": 0.05158019846507839,
+        "Recall": 0.10341714219647707,
+        "Precision": 0.2245170644657596,
+    },
+    0.9: {
+        "Bleu_1": 0.015882408323093903,
+        "Bleu_2": 0.007448183140648682,
+        "Bleu_3": 0.0035374416413782106,
+        "Bleu_4": 0.0012915172804824995,
+        "METEOR": 0.009878171867100707,
+        "ROUGE_L": 0.01717525742176102,
+        "CIDEr": 0.01736877496235754,
+        "Recall": 0.03307798797380772,
+        "Precision": 0.06732677448137409,
+    },
+    "Average across tIoUs": {
+        "Bleu_1": 0.06574967075327968,
+        "Bleu_2": 0.03125849841723049,
+        "Bleu_3": 0.01463015085856336,
+        "Bleu_4": 0.006173238815400976,
+        "METEOR": 0.03626437162077482,
+        "ROUGE_L": 0.0708889262956518,
+        "CIDEr": 0.07938120900170946,
+        "Recall": 0.14578539690908648,
+        "Precision": 0.2930942821027586,
+    },
+}
+
+normal, big batches, wrong
+{
+    0.3: {
+        "Bleu_1": 0.1056420624466455,
+        "Bleu_2": 0.05063684808691228,
+        "Bleu_3": 0.02399447616177959,
+        "Bleu_4": 0.01066658404712131,
+        "METEOR": 0.056253784675179226,
+        "ROUGE_L": 0.11382532004470314,
+        "CIDEr": 0.148697655018153,
+        "Recall": 0.2628927173651692,
+        "Precision": 0.48976132054427834,
+    },
+    0.5: {
+        "Bleu_1": 0.08941116146638142,
+        "Bleu_2": 0.04339448665514217,
+        "Bleu_3": 0.021116398173828998,
+        "Bleu_4": 0.009883882048033093,
+        "METEOR": 0.049504741179620775,
+        "ROUGE_L": 0.09601377040543375,
+        "CIDEr": 0.10738299598691045,
+        "Recall": 0.17929127964260833,
+        "Precision": 0.38741913896944025,
+    },
+    0.7: {
+        "Bleu_1": 0.05477432529062681,
+        "Bleu_2": 0.02684788757831593,
+        "Bleu_3": 0.013477415056421894,
+        "Bleu_4": 0.006450639178646138,
+        "METEOR": 0.03212482317467338,
+        "ROUGE_L": 0.05838264441272359,
+        "CIDEr": 0.06242451440147922,
+        "Recall": 0.10272796638511472,
+        "Precision": 0.22191240984459826,
+    },
+    0.9: {
+        "Bleu_1": 0.016208334498795718,
+        "Bleu_2": 0.008192344763173674,
+        "Bleu_3": 0.004103675051938936,
+        "Bleu_4": 0.0020937493055176205,
+        "METEOR": 0.010352612083285627,
+        "ROUGE_L": 0.017591190443169903,
+        "CIDEr": 0.018176710929384256,
+        "Recall": 0.031173868637620557,
+        "Precision": 0.06411257342553353,
+    },
+    "Average across tIoUs": {
+        "Bleu_1": 0.06650897092561237,
+        "Bleu_2": 0.032267891770886015,
+        "Bleu_3": 0.015672991110992355,
+        "Bleu_4": 0.00727371364482954,
+        "METEOR": 0.037058990278189756,
+        "ROUGE_L": 0.0714532313265076,
+        "CIDEr": 0.08417046908398174,
+        "Recall": 0.1440214580076282,
+        "Precision": 0.2908013606959626,
+    },
+}
+
+normal
+{
+    0.3: {
+        "Bleu_1": 0.20993756,
+        "Bleu_2": 0.10860487,
+        "Bleu_3": 0.058206131,
+        "Bleu_4": 0.028938321,
+        "METEOR": 0.1072044739,
+        "ROUGE_L": 0.21132889,
+        "CIDEr": 0.1443622035,
+        "Recall": 0.97504290266,
+        "Precision": 0.87441661818,
+    },
+    0.5: {
+        "Bleu_1": 0.187872501,
+        "Bleu_2": 0.098267082,
+        "Bleu_3": 0.0525296804,
+        "Bleu_4": 0.0258714605,
+        "METEOR": 0.10453595986,
+        "ROUGE_L": 0.182378303,
+        "CIDEr": 0.14889081537,
+        "Recall": 0.9216620046,
+        "Precision": 0.0623122771,
+    },
+    0.7: {
+        "Bleu_1": 0.11881859562,
+        "Bleu_2": 0.06283721932,
+        "Bleu_3": 0.03316205542,
+        "Bleu_4": 0.01613379419,
+        "METEOR": 0.08574302544,
+        "ROUGE_L": 0.05838264441272359,
+        "CIDEr": 0.06242451440147922,
+        "Recall": 0.79584527116,
+        "Precision": 0.32965240808,
+    },
+    0.9: {
+        "Bleu_1": 0.016208334498795718,
+        "Bleu_2": 0.008192344763173674,
+        "Bleu_3": 0.00978045399812,
+        "Bleu_4": 0.00434144188608,
+        "METEOR": 0.04033038560000002,
+        "ROUGE_L": 0.017591190443169903,
+        "CIDEr": 0.058504590289,
+        "Recall": 0.519921310998,
+        "Precision": 0.1020443721,
+    },
+    "Average across tIoUs": {
+        "Bleu_1": 0.13320924777969895,
+        "Bleu_2": 0.06947537902079343,
+        "Bleu_3": 0.03841958020453,
+        "Bleu_4": 0.01882125439402,
+        "METEOR": 0.08445346120000001,
+        "ROUGE_L": 0.11742025696397337,
+        "CIDEr": 0.10354553089011981,
+        "Recall": 0.8031178723545,
+        "Precision": 0.342106418865,
+    },
+}
+
+
+
+
+9988,10500
+
+python main.py \
+    --feature_type vggish \
+    --on_extraction save_numpy \
+    --device_ids 0 \
+    --video_paths ../../final/2/video.mp4 \
+    --output_path ../../final/2
+
+
+    # run this from the BMT main folder:
+cd ../../
+conda deactivate
+conda activate bmt
+python ./sample/single_video_prediction.py \
+    --prop_generator_model_path ./sample/best_prop_model.pt \
+    --pretrained_cap_model_path ./sample/best_cap_model.pt \
+    --vggish_features_path ./final/2/video_vggish.npy \
+    --rgb_features_path ./final/2/video_rgb.npy \
+    --flow_features_path ./final/2/video_flow.npy \
+    --duration_in_secs 31 \
+    --device_id 0 \
+    --max_prop_per_vid 100 \
+    --nms_tiou_thresh 0.4
+
+python ./sample/single_video_prediction.py \
+    --prop_generator_model_path ./sample/best_prop_model.pt \
+    --pretrained_cap_model_path ./sample/best_cap_model.pt \
+    --vggish_features_path ./test/dribble_vggish.npy \
+    --rgb_features_path ./test/dribble_rgb.npy \
+    --flow_features_path ./test/dribble_flow.npy \
+    --duration_in_secs 31 \
+    --device_id 0 \
+    --max_prop_per_vid 100 \
+    --nms_tiou_thresh 0.4
+
+python ./sample/single_video_prediction.py      --prop_generator_model_path ./sample/best_prop_model.pt     --pretrained_cap_model_path ./sample/best_cap_model.pt     --vggish_features_path ./final/2/video_vggish.npy     --rgb_features_path ./final/2/video_rgb.npy     --flow_features_path ./final/2/video_flow.npy     --duration_in_secs 31     --device_id 0     --max_prop_per_vid 100     --nms_tiou_thresh 0.4 --video_path ./test/dribble.mp4
+
+beam
+[{'start': 70.0, 'end': 118.9, 'sentence': 'A man is seen standing on a basketball court'}, 
+ {'start': 4.4, 'end': 20.0, 'sentence': 'A man is talking'}, 
+ {'start': 99.3, 'end': 127.0, 'sentence': 'The man continues speaking'}, 
+ {'start': 0.3, 'end': 2.7, 'sentence': 'We see an opening title screen'},
+ {'start': 14.4, 'end': 110.8, 'sentence': 'Man is standing in a court'},
+ {'start': 0.0, 'end': 56.8, 'sentence': 'A man is seen speaking to the camera and leads into him playing basketball'}, 
+ {'start': 13.7, 'end': 33.4, 'sentence': 'He continues talking'},
+ {'start': 0.9, 'end': 7.0, 'sentence': 'We see an opening title screen'}]
+
+greedy
+[{'start': 70.0, 'end': 118.9, 'sentence': 'He is doing a basketball game'}, 
+ {'start': 4.4, 'end': 20.0, 'sentence': 'A man is seen standing on a court and leads into a basketball court playing basketball'}, 
+ {'start': 99.3, 'end': 127.0, 'sentence': 'The man continues to speak to the camera whilethe man continues to speak to the camera'}, 
+ {'start': 0.3, 'end': 2.7, 'sentence': 'We see a titlescreen'}, 
+ {'start': 14.4, 'end': 110.8, 'sentence': 'The man is seen speaking to the camera whileanother man is seen speaking to the camera'}, 
+ {'start': 0.0, 'end': 56.8, 'sentence': 'A man is seen standing in a court speaking to the camera while a man is seen speaking to the camera'}, 
+ {'start': 13.7, 'end': 33.4, 'sentence': 'The man continues to talk about how to do the same'},
+ {'start': 0.9, 'end': 7.0, 'sentence': 'A white screen appears with white words on the screen'}]

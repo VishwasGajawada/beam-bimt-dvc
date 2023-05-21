@@ -1,0 +1,4 @@
+Three people stand by the corner of a building	0.0	13.72	83.15	train	100
+v_V_Nj_BhesEY	One of the persons, a young boy, takes a bow	14.14	17.05	83.15	train	101
+v_V_Nj_BhesEY	A crowd of people watch him	0.0	83.15	83.15	train	102
+v_V_Nj_BhesEY	He proceeds to perform various karate moves, such as bowing, cartwheels and flips	17.46	83.15	83.15	train	103

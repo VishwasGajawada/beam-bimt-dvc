@@ -1,0 +1,16 @@
+Video Duration: 145.481
+145.481
+Contructing caption_iterator for "train" phase
+Using vanilla Generator
+initialization: xavier
+Glove emb of the same size as d_model_caps
+Pretrained caption path: 
+ ./sample/best_cap_model.pt
+B =  1
+B =  1
+B =  1
+B =  1
+B =  1
+[{'start': 9.6, 'end': 136.6, 'sentence': 'A man is sitting on a sidewalk playing a guitar'}, {'start': 1.0, 'end': 59.1, 'sentence': 'The man is sitting on the chair and playing the guitar'}, {'start': 138.9, 'end': 145.5, 'sentence': 'The girl and the girl are playing drums'}, {'start': 143.8, 'end': 144.5, 'sentence': 'A man in a black shirt is sitting on a table'}, {'start': 132.2, 'end': 140.8, 'sentence': 'A woman is seen sitting on a stage playing a flute while a woman behind her'}]
+video
+

@@ -1,0 +1,2 @@
+[{'start': 2.0, 'end': 12.5, 'sentence': 'A man in a black shirt is standing in a room'}, {'start': 5.2, 'end': 78.2, 'sentence': 'A man is seen standing in a gym performing various flips'}, {'start': 0.0, 'end': 5.8, 'sentence': 'A man in a black shirt is standing in a gym'}, {'start': 70.5, 'end': 81.5, 'sentence': 'The man does a back flips and flips'}]
+

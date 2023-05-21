@@ -1,0 +1,2 @@
+[{'start': 2.5, 'end': 27.4, 'sentence': 'The person puts a contact lens in'}, {'start': 30.2, 'end': 69.9, 'sentence': 'The woman puts a contact lens on'}, {'start': 63.5, 'end': 94.7, 'sentence': 'A person puts a contact lens on'}, {'start': 0.1, 'end': 11.9, 'sentence': 'A woman holds a contact lens'}]
+video

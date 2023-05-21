@@ -1,0 +1,3 @@
+[{'start': 0.0, 'end': 1.5, 'sentence': 'A man is sitting on a chair'}, {'start': 15.1, 'end': 17.1, 'sentence': 'A person is seen sitting on a bed with a pair of shoes on it'}, {'start': 0.0, 'end': 16.6, 'sentence': 'A woman is sitting on a chair with a pair of shoes'}, {'start': 0.4, 'end': 6.5, 'sentence': 'A person is sitting on a chair with a towel'}, {'start': 2.8, 'end': 4.2, 'sentence': 'She finishes and puts her leg down'}, {'start': 12.5, 'end': 15.7, 'sentence': 'The person puts the shoe on the shoe'}, {'start': 0.4, 'end': 0.6, 'sentence': 'A man is sitting on a chair'}]
+video
+

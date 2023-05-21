@@ -1,0 +1,1 @@
+[{'start': 0.0, 'end': 7.5, 'sentence': 'We see a person in a room'}, {'start': 0.0, 'end': 2.9, 'sentence': 'We see a person in a room'}, {'start': 3.0, 'end': 14.0, 'sentence': 'A person is seen standing in a room with a vacuum'}, {'start': 19.2, 'end': 36.5, 'sentence': 'The dog continues to hit the ball back and forth and forth'}]

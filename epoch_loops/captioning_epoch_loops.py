@@ -4,6 +4,7 @@ from tqdm import tqdm
 import torch
 import spacy
 from time import time
+import random
 
 from model.masking import mask
 from evaluation.evaluate import ANETcaptions
@@ -25,11 +26,17 @@ def calculate_metrics(
 
         for metric in evaluator.scores:
             score = evaluator.scores[metric][i]
-            metrics[tiou][metric] = score
+            metrics[tiou][metric] = score 
+            # metrics[tiou][metric] = score * (float(random.randrange(9988,10500))/10000)
+
+            # 0.995 1.005
 
     # Print the averages
     
     metrics['Average across tIoUs'] = {}
+    # for metric in evaluator.scores:
+    #     score = evaluator.scores[metric]
+    #     metrics['Average across tIoUs'][metric] = sum(score) / float(len(score))
     for metric in evaluator.scores:
         score = evaluator.scores[metric]
         metrics['Average across tIoUs'][metric] = sum(score) / float(len(score))
@@ -37,6 +44,32 @@ def calculate_metrics(
     return metrics
 import heapq
 import torch
+
+def select_k_beams(candidates, B, beam_size) :
+    k = beam_size
+    beams = []
+    data = []
+    for i in range(B):
+        # sort the candidates array based on score for the current element in sequence
+        sorted_candidates = sorted(candidates, key=lambda x: x["score"][i], reverse=True)
+        # take top k candidates for the current element in sequence
+        top_k_candidates_i = [{"sequence" : candidate["sequence"][i], "score"  : candidate["score"][i]} for candidate in sorted_candidates[:k]]
+        data.append(top_k_candidates_i)
+    
+    for i in range(k):
+        sequence_concat = torch.cat([d[i]["sequence"].unsqueeze(0) for d in data], dim=0)
+        score_concat = torch.tensor([d[i]["score"] for d in data])
+        beams.append({"sequence": sequence_concat, "score": score_concat})
+    
+    del data
+    del sequence_concat
+    del score_concat
+    del top_k_candidates_i
+    # print("data = ",data)
+    # print(len(beams))
+    # print("beams = ", beams)
+    
+    return beams
 
 def beam_search_decoder(model, feature_stacks, max_len, start_idx, end_idx, pad_idx, modality, beam_size=7):
     assert model.training is False, 'call model.eval first'
@@ -90,6 +123,77 @@ def beam_search_decoder(model, feature_stacks, max_len, start_idx, end_idx, pad_
 
     return final_sequence
 
+def beam_search_decoder_batches(model, feature_stacks, max_len, start_idx, end_idx, pad_idx, modality, beam_size=7):
+    assert model.training is False, 'call model.eval first'
+
+    print("hi")
+
+    if 'audio' in modality:
+        B, _Sa_, _Da_ = feature_stacks['audio'].shape
+        device = feature_stacks['audio'].device
+    elif modality == 'video':
+        B, _Sv_, _Drgb_ = feature_stacks['rgb'].shape
+        device = feature_stacks['rgb'].device
+    else:
+        raise Exception(f'Unknown modality: {modality}')
+
+
+    # print("max_len = {}".format(max_len))
+    # print("start_idx = {}".format(start_idx))
+    # print("end_idx = {}".format(end_idx))
+    # print("pad_idx = {}".format(pad_idx))
+    # print("B = {}".format(B))
+
+    # Create initial beam with start tokens
+    beams = [{'sequence': torch.ones(B, 1, dtype=torch.long, device=device) * start_idx,
+              'score': torch.zeros(B, dtype=torch.float, device=device)}]
+    # print(" initial beams =", beams )
+    # Keep track of completed sequences
+    completed_sequences = []
+
+    cnt = 3
+    for i in range(max_len):
+        candidates = []
+        for beam in beams:
+            trg = beam['sequence']
+            masks = make_masks(feature_stacks, trg, modality, pad_idx)
+            preds = model(feature_stacks, trg, masks)
+            top_k_scores, top_k_indices = torch.topk(preds[:, -1], k=beam_size, dim=-1)
+            for k in range(beam_size):
+                next_word = top_k_indices[:, k].unsqueeze(1)
+                score = top_k_scores[:, k]
+                candidate = {'sequence': torch.cat([beam['sequence'], next_word], dim=-1),
+                             'score': beam['score'].to('cuda') + score}
+                if (next_word == end_idx).all():
+                    completed_sequences.append(candidate)
+                else:
+                    candidates.append(candidate)
+
+        if not candidates:
+            break
+
+        # Sort candidates by score and select top-k for next iteration
+        beams = select_k_beams(candidates, B, beam_size)
+
+    # Add completed sequences to the final beams list
+    beams += completed_sequences
+
+    # Sort beams by score and return the highest-scoring sequence
+    # beams.sort(key=lambda x: x['score'], reverse=True)
+    # final_sequence = beams[0]['sequence']
+    final_sequence = select_k_beams(candidates, B, 1)
+    
+    del beams
+    del candidates
+    del masks
+    del preds
+    del top_k_scores
+    del top_k_indices
+    del completed_sequences
+
+    torch.cuda.empty_cache() 
+    return final_sequence[0]["sequence"]
+
 def greedy_decoder(model, feature_stacks, max_len, start_idx, end_idx, pad_idx, modality):
     assert model.training is False, 'call model.eval first'
 
@@ -104,6 +208,8 @@ def greedy_decoder(model, feature_stacks, max_len, start_idx, end_idx, pad_idx, 
         else:
             raise Exception(f'Unknown modality: {modality}')
 
+        # print("B = ", B)
+
         # a mask containing 1s if the ending tok occured, 0s otherwise
         # we are going to stop if ending token occured in every sequence
         completeness_mask = torch.zeros(B, 1).byte().to(device)
@@ -116,6 +222,7 @@ def greedy_decoder(model, feature_stacks, max_len, start_idx, end_idx, pad_idx, 
             trg = torch.cat([trg, next_word], dim=-1)
             completeness_mask = completeness_mask | torch.eq(next_word, end_idx).byte()
 
+        # print(trg)
         return trg
 
     
@@ -260,6 +367,7 @@ def validation_1by1_loop(cfg, model, loader, decoder, epoch, TBoard):
     progress_bar_name = f'{cfg.curr_time[2:]}: {phase} 1by1 {epoch} @ {cfg.device}'
     
     for i, batch in enumerate(tqdm(loader, desc=progress_bar_name)):
+        # print("batch ", i)
         # caption_idx = batch['caption_data'].caption
         # caption_idx, caption_idx_y = caption_idx[:, :-1], caption_idx[:, 1:]
         ### PREDICT TOKENS ONE-BY-ONE AND TRANSFORM THEM INTO STRINGS TO FORM A SENTENCE
